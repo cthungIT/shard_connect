@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'shard_connect/relation_proxy'
 
 class ShardConnect
   def self.hi
