@@ -6,7 +6,7 @@ class ShardConnect
 
     def initialize(rel, role, shard)
       @rel = rel
-      Rails.logger.info("#{self.class.name}:#{role},#{shard}")
+      puts "#{self.class.name}:#{role},#{shard}"
       self.current_role = ActiveRecord::Base.writing_role if role&.to_sym == :master
       self.current_role ||= ActiveRecord::Base.reading_role
       self.current_shard = shard

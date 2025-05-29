@@ -18,7 +18,7 @@ class ShardConnect
   module UsingShard
     def using(role, shard = nil)
       Rails.logger.info("#{self.class.name}:#{__method__}=>#{role}:#{shard}")
-      RelationProxy.new(all, role, shard&.to_sym)
+      ShardConnect::RelationProxy.new(all, role, shard&.to_sym)
     end
   end
 
