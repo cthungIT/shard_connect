@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.description = "ShardConnect provides Octopus-like database sharding helper methods for ActiveRecord 6.1 or later, using Rails' native horizontal sharding handling. This provides migration path to Rails 6.1+ for applications using Octopus gem with older Rails."
   s.authors     = ['Johny Cao']
   s.email       = 'cthung.it2013@gmail.com'
-  s.files       = `git ls-files`.split("\n")
-  s.files = ['lib/shard_connect.rb', 'lib/shard_connect/version.rb', 'lib/shard_connect/using_shard.rb', 'lib/shard_connect/relation_proxy.rb']
+  s.files       = `git ls-files lib`.split("\n")
+  # s.files = ['lib/shard_connect.rb', 'lib/shard_connect/version.rb', 'lib/shard_connect/using_shard.rb', 'lib/shard_connect/relation_proxy.rb']
   # s.test_files  = `git ls-files -- {spec}/*`.split("\n")
   s.homepage    = 'https://github.com/cthungIT/shard_connect'
   s.require_paths = ['lib']
