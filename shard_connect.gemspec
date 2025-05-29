@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Johny Cao']
   s.email       = 'cthung.it2013@gmail.com'
   s.files       = `git ls-files`.split("\n")
-  # s.files = ['lib/shard_connect.rb', 'lib/shard_connect/version.rb', 'lib/shard_connect/using_shard.rb', 'lib/shard_connect/relation_proxy.rb']
+  s.files = ['lib/shard_connect.rb', 'lib/shard_connect/version.rb', 'lib/shard_connect/using_shard.rb', 'lib/shard_connect/relation_proxy.rb']
   # s.test_files  = `git ls-files -- {spec}/*`.split("\n")
   s.homepage    = 'https://github.com/cthungIT/shard_connect'
   s.require_paths = ['lib']
