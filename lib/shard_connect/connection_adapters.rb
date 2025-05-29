@@ -11,7 +11,7 @@ class ShardConnect
   end
 
   module ConnectionHasCurrentShard
-    attr_accessor :specify_shard, :specify_role
+    attr_accessor :current_shard, :current_role
   end
 
   if ActiveRecord.gem_version >= Gem::Version.new('7.2.0')

@@ -6,7 +6,6 @@ class ShardConnect
 
     def initialize(rel, role, shard)
       @rel = rel
-      puts "#{self.class.name}:#{role},#{shard}"
       self.current_role = ActiveRecord::Base.writing_role if role&.to_sym == :master
       self.current_role ||= ActiveRecord::Base.reading_role
       self.current_shard = shard
@@ -43,7 +42,7 @@ class ShardConnect
     rescue StandardError
       nil
     end + %i[each map index_by]
-    ENUM_WITH_BLOCK_METHODS = %i[find select none? any? one? many? sum].freeze
+    ENUM_WITH_BLOCK_METHODS = %i[find select none? any? one? many? sum exists?].freeze
 
     def method_missing(method, *args, &block)
       return @rel.public_send(method, *args, &block) unless @rel.respond_to?(method)
