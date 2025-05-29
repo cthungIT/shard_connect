@@ -6,8 +6,8 @@ class ShardConnect
 
     def initialize(rel, role, shard)
       @rel = rel
-      self.current_role = ActiveRecord::Base.writing_role if role&.to_sym == :master
-      self.current_role ||= ActiveRecord::Base.reading_role
+      self.current_role = ::ActiveRecord::Base.writing_role if role&.to_sym == :master
+      self.current_role ||= ::ActiveRecord::Base.reading_role
       self.current_shard = shard
     end
 

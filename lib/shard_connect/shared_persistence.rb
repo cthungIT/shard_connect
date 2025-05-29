@@ -8,9 +8,9 @@ class ShardConnect
        transaction with_transaction_returning_status].each do |method|
       class_eval <<-"END", __FILE__, __LINE__ + 1
           def #{method}(*args, &block)
-            return super if !current_shard || current_shard == ActiveRecord::Base.current_shard
+            return super if !current_shard || current_shard == ::ActiveRecord::Base.current_shard
 
-            ActiveRecord::Base.connected_to(shard: current_shard, role: ShardConnect.current_role) do
+            ::ActiveRecord::Base.connected_to(shard: current_shard, role: ShardConnect.current_role) do
               super
             end
           end

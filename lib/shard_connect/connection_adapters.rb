@@ -2,7 +2,7 @@
 
 class ShardConnect
   module ConnectionHandlerSetCurrentShard
-    def retrieve_connection(spec_name, role: ActiveRecord::Base.current_role, shard: ActiveRecord::Base.current_shard)
+    def retrieve_connection(spec_name, role: ::ActiveRecord::Base.current_role, shard: ::ActiveRecord::Base.current_shard)
       conn = super
       conn.current_shard = shard
       conn.current_role = role
@@ -14,7 +14,7 @@ class ShardConnect
     attr_accessor :current_shard, :current_role
   end
 
-  if ActiveRecord.gem_version >= Gem::Version.new('7.2.0')
+  if ::ActiveRecord.gem_version >= Gem::Version.new('7.2.0')
     module ConnectionPoolSetCurrentShard
       def with_connection(prevent_permanent_checkout: false)
         lease = connection_lease
