@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'lib/shard_connect/relation_proxy'
-
 class ShardConnect
   def self.hi
     puts 'Hello World!'
@@ -20,7 +18,7 @@ class ShardConnect
   module UsingShard
     def using(role, shard = nil)
       Rails.logger.info("#{self.class.name}:#{__method__}=>#{role}:#{shard}")
-      ShardConnect::RelationProxy.new(all, role, shard&.to_sym)
+      RelationProxy.new(all, role, shard&.to_sym)
     end
   end
 
