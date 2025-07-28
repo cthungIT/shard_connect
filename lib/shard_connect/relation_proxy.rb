@@ -49,15 +49,15 @@ class ShardConnect
 
       preamble = <<-EOS
           def #{method}(*margs, &mblock)
-            return @rel.#{method}(*margs, &mblock) unless @current_role
+            return @rel.#{method}(*margs, &mblock) unless @specify_role
       EOS
       postamble = <<-EOS
             return ret unless ret.is_a?(::ActiveRecord::Relation) || ret.is_a?(::ActiveRecord::QueryMethods::WhereChain) || ret.is_a?(::Enumerator)
-            ::ShardConnect::RelationProxy.new(ret, @current_role, @current_shard)
+            ::ShardConnect::RelationProxy.new(ret, @specify_role, @specify_shard)
           end
           ruby2_keywords(:#{method}) if respond_to?(:ruby2_keywords, true)
       EOS
-      connected_to = '::ActiveRecord::Base.connected_to(role: @current_role, shard: @current_shard)'
+      connected_to = '::ActiveRecord::Base.connected_to(role: @specify_role, shard: @specify_shard)'
 
       if ENUM_METHODS.include?(method)
         ::ShardConnect::RelationProxy.class_eval <<-EOS, __FILE__, __LINE__ - 1
