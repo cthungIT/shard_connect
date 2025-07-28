@@ -2,28 +2,28 @@
 
 class ShardConnect
   class RelationProxy < BasicObject
-    attr_reader :current_shard, :current_role
+    attr_reader :specify_role, :specify_shard
 
     def initialize(rel, role, shard)
       @rel = rel
-      self.current_role = ::ActiveRecord::Base.writing_role if role&.to_sym == :master
-      self.current_role ||= ::ActiveRecord::Base.reading_role
-      self.current_shard = shard
+      self.specify_role = ::ActiveRecord::Base.writing_role if role&.to_sym == :master
+      self.specify_role ||= ::ActiveRecord::Base.reading_role
+      self.specify_shard = shard
     end
 
-    def current_role=(role)
-      @current_role = role
-      @rel.current_role = role unless @rel.is_a?(::Enumerator) # TODO: TESTING (current_role or specify_role)
+    def specify_role=(role)
+      @specify_role = role
+      @rel.specify_role = role unless @rel.is_a?(::Enumerator) # TODO: TESTING (current_role or specify_role)
     end
 
-    def current_shard=(shard)
-      @current_shard = shard
-      @rel.current_shard = shard unless @rel.is_a?(::Enumerator) # TODO: TESTING (current_shard or specify_shard)
+    def specify_shard=(shard)
+      @specify_shard = shard
+      @rel.specify_shard = shard unless @rel.is_a?(::Enumerator) # TODO: TESTING (current_shard or specify_shard)
     end
 
     def using(role, shard = nil)
-      self.current_role = role
-      self.current_shard = shard
+      self.specify_role = role
+      self.specify_shard = shard
       self
     end
 
@@ -32,7 +32,7 @@ class ShardConnect
     end
 
     def respond_to?(method, include_all = false)
-      return true if %i[ar_relation current_role current_role= current_shard current_shard= using].include?(method)
+      return true if %i[ar_relation specify_role specify_role= specify_shard specify_shard= using].include?(method)
 
       @rel.respond_to?(method, include_all)
     end
@@ -90,23 +90,23 @@ class ShardConnect
     ruby2_keywords(:method_missing) if respond_to?(:ruby2_keywords, true)
 
     def inspect
-      return @rel.inspect unless @current_role
+      return @rel.inspect unless @specify_role
 
-      ::ActiveRecord::Base.connected_to(shard: @current_shard, role: @current_role) { @rel.inspect }
+      ::ActiveRecord::Base.connected_to(shard: @specify_shard, role: @specify_role) { @rel.inspect }
     end
 
     def ==(other)
-      return false if other.respond_to?(:current_role) && other.current_role != @current_role
-      return @rel == other unless @current_role
+      return false if other.respond_to?(:current_role) && other.current_role != @specify_role
+      return @rel == other unless @specify_role
 
-      ::ActiveRecord::Base.connected_to(shard: @current_shard, role: @current_role) { @rel == other }
+      ::ActiveRecord::Base.connected_to(shard: @specify_role, role: @specify_role) { @rel == other }
     end
 
     def ===(obj)
-      return false if obj.respond_to?(:current_shard) && obj.current_shard != @current_shard
-      return @rel === obj unless @current_shard
+      return false if obj.respond_to?(:specify_shard) && obj.specify_shard != @specify_shard
+      return @rel === obj unless @specify_shard
 
-      ::ActiveRecord::Base.connected_to(shard: @current_shard, role: @current_role) { @rel === obj }
+      ::ActiveRecord::Base.connected_to(shard: @specify_shard, role: @specify_role) { @rel === obj }
     end
   end
 end
