@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShardConnect
+module ShardConnect
   class MismatchedShards < StandardError
     attr_reader :record, :current_shard, :current_role
 

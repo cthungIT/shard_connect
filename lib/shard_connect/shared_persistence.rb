@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShardConnect
+module ShardConnect
   module ShardedPersistence
     # cover methods using `self.class.connection`.
     # NOTE: decrement! is implemented using increment!

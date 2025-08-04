@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShardConnect
+module ShardConnect
   module ConnectionHandlingAvoidAutoLoadProxy
     private
 

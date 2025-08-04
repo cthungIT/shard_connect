@@ -4,7 +4,7 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'shard_connect/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'shard_connect'
+  s.name        = 'ar-shard'
   s.version     = ShardConnect::VERSION
   s.licenses    = ['MIT']
   s.summary     = 'ShardConnect-like Database Sharding Helper for ActiveRecord 6.1+'

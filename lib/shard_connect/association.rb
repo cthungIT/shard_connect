@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShardConnect
+module ShardConnect
   module RelationCurrentShard
     attr_accessor :current_shard
   end

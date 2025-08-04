@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShardConnect
+module ShardConnect
   module ConnectionHandlerSetCurrentShard
     def retrieve_connection(spec_name, role: ::ActiveRecord::Base.current_role, shard: ::ActiveRecord::Base.current_shard)
       conn = super

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Implementation courtesy of db-charmer.
-class ShardConnect
+module ShardConnect
   module LogSubscriber
     attr_accessor :current_shard
 
