@@ -5,7 +5,7 @@ class ShardConnect
   end
 
   def self.using(role, shard = nil, &block)
-    Rails.logger.info("#{self.class.name}:#{__method__}=>#{role}:#{shard}")
+    Rails.logger.info("ppp:#{self.class.name}:#{__method__}=>#{role}:#{shard}")
     specify_role = ::ActiveRecord::Base.writing_role if role&.to_sym == :master
     specify_role ||= ::ActiveRecord::Base.reading_role
     ::ActiveRecord::Base.connected_to(role: specify_role, shard: shard&.to_sym, &block)
@@ -13,7 +13,7 @@ class ShardConnect
 
   module UsingShard
     def using(role, shard = nil)
-      Rails.logger.info("#{self.class.name}:#{__method__}=>#{role}:#{shard}")
+      Rails.logger.info("000:#{self.class.name}:#{__method__}=>#{role}:#{shard}")
       ShardConnect::RelationProxy.new(all, role, shard&.to_sym)
     end
   end
