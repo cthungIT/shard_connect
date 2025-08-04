@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShardConnect
+module ShardConnect
   class RelationProxy < BasicObject
     attr_reader :specify_role, :specify_shard
 
