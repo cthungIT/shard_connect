@@ -7,7 +7,6 @@ module ShardConnect
 
     def initialize(rel, role, shard)
       @rel = rel
-      puts "specify role: #{role}=>#{shard}"
       self.specify_role = ::ActiveRecord::Base.writing_role if role&.to_sym == :master
       self.specify_role ||= ::ActiveRecord::Base.reading_role
       self.specify_shard = shard
