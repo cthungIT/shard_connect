@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'shard_connect/relation_proxy'
+
 module ShardConnect
   def self.hi
     puts 'Hello World!'
